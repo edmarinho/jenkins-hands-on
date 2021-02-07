@@ -21,33 +21,6 @@ pipeline {
                 }
             }
         }
-        stage ('APT-GET update') {
-            steps {
-                sshPublisher(publishers: 
-                    [sshPublisherDesc
-                        (configName: 'WEBSITE',
-                        transfers:
-                            [sshTransfer
-                                (cleanRemote: false,
-                                excludes: '',
-                                execCommand: 'sudo apt-get update',
-                                execTimeout: 120000,
-                                flatten: false,
-                                makeEmptyDirs: false,
-                                noDefaultExcludes: false,
-                                patternSeparator: '[, ]+',
-                                remoteDirectory: '',
-                                remoteDirectorySDF: false,
-                                removePrefix: '',
-                                sourceFiles: '')
-                            ],
-                        usePromotionTimestamp: false,
-                        useWorkspaceInPromotion: false,
-                        verbose: true)
-                    ]
-                )
-            }
-        }
         stage ('Install WebServer') {
             steps {
                 sshPublisher(publishers: 
@@ -57,7 +30,7 @@ pipeline {
                             [sshTransfer
                                 (cleanRemote: false,
                                 excludes: '',
-                                execCommand: 'sudo apt install nginx -y',
+                                execCommand: 'sudo apt update && apt install nginx -y',
                                 execTimeout: 120000,
                                 flatten: false,
                                 makeEmptyDirs: false,
