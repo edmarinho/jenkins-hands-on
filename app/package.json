@@ -1,0 +1,23 @@
+{
+  "name": "http-server-template",
+  "version": "1.0.0",
+  "description": "Simple http server for hosting projects",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm install && grunt server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Khanos/http-server-template.git"
+  },
+  "author": "Epilef Rodriguez",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Khanos/http-server-template/issues"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
