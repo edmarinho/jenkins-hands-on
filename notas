@@ -6,4 +6,8 @@
 - Executar Hello World
 - Instalar plugin Publish Over SSH
 - Mostrar logs
--
+- Configurar o SSH Server (Key, IP, Username)
+- Reconfigurar a pipeline com cada passo
+- Criar credential para acesso ao GitHub
+- Criar pipeline de check ()
+

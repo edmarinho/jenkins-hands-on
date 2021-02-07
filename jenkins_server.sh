@@ -9,3 +9,4 @@ sudo apt update &&
 sudo apt install jenkins -y &&
 sudo systemctl start jenkins &&
 sudo systemctl status jenkins
+apt install nodejs npm -y && npm install -g grunt-cli
