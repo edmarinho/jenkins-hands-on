@@ -5,9 +5,7 @@ pipeline {
     // Variáveis
     environment {
     WORKSPACE_DIR               =   pwd()
-    EC2_USER                    =   'ubuntu'
-    EC2_IP                      =   'IP'
-    EC2_KEY_SSH                 =   credentials('ssh_connect')
+    GIT_HUB                     =   'https://github.com/edmarinho/jenkins-hands-on.git'
     }
 
     // Estágios
@@ -16,9 +14,10 @@ pipeline {
             steps {
                 deleteDir()
                 dir("${WORKSPACE_DIR}/"){
-                    sh ''' if [ ! -d $LOG_DIR ]; then
-                            mkdir $LOG_DIR
-                         fi '''
+                    git credentialsId: 'github_credentials',
+                        branch: 'master',
+                        url: "${GIT_HUB}"
+                    sh 'npm install'
                 }
             }
         }
@@ -59,33 +58,6 @@ pipeline {
                                 (cleanRemote: false,
                                 excludes: '',
                                 execCommand: 'sudo apt install nginx nodejs npm -y && sudo npm install -g grunt-cli',
-                                execTimeout: 120000,
-                                flatten: false,
-                                makeEmptyDirs: false,
-                                noDefaultExcludes: false,
-                                patternSeparator: '[, ]+',
-                                remoteDirectory: '',
-                                remoteDirectorySDF: false,
-                                removePrefix: '',
-                                sourceFiles: '')
-                            ],
-                        usePromotionTimestamp: false,
-                        useWorkspaceInPromotion: false,
-                        verbose: true)
-                    ]
-                )
-            }
-        }
-        stage ('APT-GET update') {
-            steps {
-                sshPublisher(publishers: 
-                    [sshPublisherDesc
-                        (configName: 'WEBSITE',
-                        transfers:
-                            [sshTransfer
-                                (cleanRemote: false,
-                                excludes: '',
-                                execCommand: 'sudo apt-get update',
                                 execTimeout: 120000,
                                 flatten: false,
                                 makeEmptyDirs: false,
